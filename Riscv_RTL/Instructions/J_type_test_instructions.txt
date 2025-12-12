@@ -1,0 +1,4 @@
+addi x1, x0, 5        # x1 = 5
+jal  x2, 8            # jump forward by 8 bytes (2 instructions)
+addi x3, x0, 0        # SHOULD BE SKIPPED
+addi x3, x0, 1        # executed after jump

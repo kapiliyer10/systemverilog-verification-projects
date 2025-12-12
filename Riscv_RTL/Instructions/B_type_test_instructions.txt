@@ -1,0 +1,5 @@
+addi x1, x0, 5       # x1 = 5
+addi x2, x0, 5       # x2 = 5
+beq  x1, x2, 8       # Branch should be taken (offset = +8 bytes)
+addi x3, x0, 0       # SKIPPED if branch works
+addi x3, x0, 1       # Executed only if branch is taken
