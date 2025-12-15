@@ -1,0 +1,250 @@
+$date
+	Sat Dec 13 22:52:20 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_fifo $end
+$var wire 1 ! full $end
+$var wire 1 " empty $end
+$var wire 8 # dout [7:0] $end
+$var parameter 32 $ DEPTH $end
+$var parameter 32 % WIDTH $end
+$var reg 1 & clk $end
+$var reg 8 ' din [7:0] $end
+$var reg 1 ( prev_empty $end
+$var reg 1 ) prev_full $end
+$var reg 1 * rd_en $end
+$var reg 1 + rd_en_d $end
+$var reg 1 , rst $end
+$var reg 1 - wr_en $end
+$var integer 32 . cov_empty_seen [31:0] $end
+$var integer 32 / cov_empty_to_nonempty [31:0] $end
+$var integer 32 0 cov_full_seen [31:0] $end
+$var integer 32 1 cov_full_to_nonfull [31:0] $end
+$var integer 32 2 cov_read_only [31:0] $end
+$var integer 32 3 cov_simul_rw [31:0] $end
+$var integer 32 4 cov_write_only [31:0] $end
+$var integer 32 5 read_idx [31:0] $end
+$var integer 32 6 write_idx [31:0] $end
+$scope module dut $end
+$var wire 1 & clk $end
+$var wire 8 7 din [7:0] $end
+$var wire 1 * rd_en $end
+$var wire 1 , rst $end
+$var wire 1 - wr_en $end
+$var wire 1 ! full $end
+$var wire 1 " empty $end
+$var parameter 32 8 ADDR_WIDTH $end
+$var parameter 32 9 COUNT_WIDTH $end
+$var parameter 32 : DEPTH $end
+$var parameter 32 ; WIDTH $end
+$var reg 5 < count [4:0] $end
+$var reg 8 = dout [7:0] $end
+$var reg 4 > read_ptr [3:0] $end
+$var reg 4 ? write_ptr [3:0] $end
+$upscope $end
+$scope begin $ivl_for_loop0 $end
+$var integer 32 @ i [31:0] $end
+$upscope $end
+$scope task read_fifo $end
+$upscope $end
+$scope task report_coverage $end
+$upscope $end
+$scope task reset_apply $end
+$upscope $end
+$scope task write_fifo $end
+$var reg 8 A data [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1000 ;
+b10000 :
+b101 9
+b100 8
+b1000 %
+b10000 $
+$end
+#0
+$dumpvars
+bx A
+b0 @
+b0 ?
+b0 >
+b0 =
+b0 <
+b0 7
+b0 6
+b0 5
+b0 4
+b0 3
+b0 2
+b0 1
+b0 0
+b0 /
+b0 .
+0-
+1,
+x+
+0*
+0)
+1(
+b0 '
+0&
+b0 #
+1"
+0!
+$end
+#10000
+0+
+1&
+#20000
+0&
+#30000
+b1010 A
+b1 .
+0,
+1&
+#40000
+0&
+#50000
+0"
+b1 <
+b1 ?
+b10 .
+b1 4
+b1 6
+1-
+b1010 '
+b1010 7
+1&
+#60000
+0&
+#70000
+0(
+b1011 A
+b1 @
+0-
+b1 /
+b10 4
+1&
+#80000
+0&
+#90000
+b10 <
+b10 ?
+b11 4
+b10 6
+1-
+b1011 '
+b1011 7
+1&
+#100000
+0&
+#110000
+b1100 A
+b10 @
+0-
+b100 4
+1&
+#120000
+0&
+#130000
+b11 <
+b11 ?
+b101 4
+b11 6
+1-
+b1100 '
+b1100 7
+1&
+#140000
+0&
+#150000
+b1101 A
+b11 @
+0-
+b110 4
+1&
+#160000
+0&
+#170000
+b100 <
+b100 ?
+b111 4
+b100 6
+1-
+b1101 '
+b1101 7
+1&
+#180000
+0&
+#190000
+b1110 A
+b100 @
+0-
+b1000 4
+1&
+#200000
+0&
+#210000
+b101 <
+b101 ?
+b1001 4
+b101 6
+1-
+b1110 '
+b1110 7
+1&
+#220000
+0&
+#230000
+b101 @
+0-
+b1010 4
+1&
+#240000
+0&
+#250000
+1&
+#260000
+0&
+#270000
+1&
+#280000
+0&
+#290000
+#250000
+00
+0&
+#310000
+1&
+#320000
+0&
+#330000
+1&
+#340000
+0&
+#350000
+1&
+#360000
+0&
+#370000
+1&
+#380000
+0&
+#390000
+1&
+#400000
+0&
+#410000
+1&
+#420000
+0&
+#430000
+1&
