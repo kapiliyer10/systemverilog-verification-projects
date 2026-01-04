@@ -144,7 +144,7 @@ You can simulate using Vivado, ModelSim, or Verilator.
 
 
 
-\### Example (Vivado Simulation)
+ Example (Vivado Simulation)
 
 1\. Create a simulation project  
 
@@ -166,7 +166,7 @@ You can simulate using Vivado, ModelSim, or Verilator.
 
 
 
-\## Future Improvements (Optional)
+ Future Improvements (Optional)
 
 
 
@@ -181,10 +181,10 @@ You can simulate using Vivado, ModelSim, or Verilator.
 ---
 
 
-
-\## ✨ Author
+ Author
 
 Kapil Iyer  
 
 RISC-V RTL Design (Academic/Project Work)
+
 
