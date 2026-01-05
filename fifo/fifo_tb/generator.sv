@@ -87,7 +87,7 @@ task run();
     gen2drv_mb.put(req.copy());
 
     @(frb_inf.drv_clk);
-    scb.push_expected(req.data);   // commit write to model
+    scb.push_expected(req.data);  
   end
 
   // -------- READ 4 VALUES --------
@@ -113,7 +113,7 @@ endtask */
   for (int i = 0; i < DEPTH; i++) begin
     req.wr_en = 1;
     req.rd_en = 0;
-    req.data  = i;   // unique increasing values
+    req.data  = i;  
 
     $display("GEN: WRITE %0d at %0t", req.data, $time);
     gen2drv_mb.put(req.copy());
@@ -121,7 +121,7 @@ endtask */
     @(frb_inf.drv_clk);
     scb.push_expected(req.data);
   end
-  // -------- EXTRA WRITE (should NOT be allowed) --------
+  // -------Extra Write should not be allowed--------
   req.wr_en = 1;
   req.rd_en = 0;
   req.data  = 8'hAA;
@@ -140,9 +140,6 @@ endtask */
   // ---- Test-4: READ until EMPTY ----
   $display("\n--- TEST-4: READ UNTIL EMPTY ---");
 
-  // Assume FIFO already contains some data
-  // (from prior fill test or seeded writes)
-
   while (fifo_count > 0) begin
     @(frb_inf.drv_clk);
     req.wr_en = 0;
@@ -155,7 +152,6 @@ endtask */
               fifo_count, $time);
   end
 
-  // Now FIFO is EMPTY
   $display("FIFO reached EMPTY at %0t", $time);
 
   // ---- Extra READ ? should trigger ASSERTION ----
