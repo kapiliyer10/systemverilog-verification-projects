@@ -83,9 +83,6 @@ class monitor_fifo;
            
         end
     endtask
- /*   function void report();
-    fifo_cg.print();   // <-- THIS will now work
-  endfunction */
     
         
     
