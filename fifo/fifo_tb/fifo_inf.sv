@@ -1,24 +1,3 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 12/22/2025 08:21:40 PM
-// Design Name: 
-// Module Name: fifo_inf
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 interface fifo_inf #(parameter int WIDTH = 8, parameter int DEPTH = 16) (input clk);
     logic rd_en,wr_en,full,empty,rst;
     logic [WIDTH-1:0] din,dout;
