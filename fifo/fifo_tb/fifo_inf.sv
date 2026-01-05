@@ -24,7 +24,7 @@ interface fifo_inf #(parameter int WIDTH = 8, parameter int DEPTH = 16) (input c
     logic [WIDTH-1:0] din,dout;
 
     clocking drv_clk @(posedge clk);
-        default input #0 output #0;
+        default input #2 output #2;
         output wr_en,rd_en,din;
         input dout,full,empty;
     endclocking
