@@ -26,8 +26,7 @@ application.
 Testbench
 
 - The testbench follows Mailbox-based transaction flow:
-
-(Generator → Driver → Monitor → Scoreboard).
+  (Generator → Driver → Monitor → Scoreboard).
 
 - Contains Functional coverage which keeps track of the different test
   scenarios received at the monitor.
@@ -38,9 +37,10 @@ Testbench
   in the generator file.
 
 - Contains Clocking block for synchronizing the data flow from
+  Driver → Interface→ Monitor
 
-Driver → Interface→ Monitor
 
 Verification Architecture
 
+<img width="1155" height="657" alt="image" src="https://github.com/user-attachments/assets/5897647c-16cf-4817-a9e5-fad7ed7a45bb" />
 
