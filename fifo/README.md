@@ -12,8 +12,7 @@ Folder structure
 
 - fifo_rtl folder contains the rtl block of the synchronous fifo.
 
-- fifo_testbench contains the verification environment of fifo to verify
-  its behaviour.
+- fifo_testbench contains the verification environment of fifo.
 
 RTL
 
