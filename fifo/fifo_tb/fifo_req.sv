@@ -39,9 +39,6 @@ constraint state_rules {
   else if (fifo_full) {
     wr_en == 0 && rd_en == 1;
   }
-  else {
-    wr_en dist {1 := 90 , 0 := 10};
-  }
 }
     function fifo_req copy();
     copy = new();
