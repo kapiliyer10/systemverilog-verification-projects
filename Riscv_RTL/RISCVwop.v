@@ -1,32 +1,3 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 09/14/2025 06:37:47 PM
-// Design Name: 
-// Module Name: RISCVwop
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-/*`include "PC.v "
-`include "Instruction_mem.v"
-`include "Regmem.v"
-`include "Imm_gen.v"
-`include "Data_mem.v"
-`include "ALU.v"
-`include "Control_unit.v"*/
-
 module RISCVwop(
 input clk,rst
     );
