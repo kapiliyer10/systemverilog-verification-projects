@@ -1,28 +1,7 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 10/15/2025 05:36:42 PM
-// Design Name: 
-// Module Name: id_ex_reg
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 module id_ex_reg (
     input  wire        clk,
     input  wire        rst,
-    input  wire        stall,     // when inserting bubble, we set control fields to 0
+    input  wire        stall,     
     input  wire        flush,
     // inputs
     input  wire [31:0] pc_in,
@@ -84,7 +63,7 @@ module id_ex_reg (
             funct3_out     <= 3'b0;
             funct7_out     <= 7'b0;
         end else if (flush) begin
-            // convert to bubble on flush: clear control signals, keep others safe
+            
             pc_out         <= 32'b0;
             rs1_data_out   <= 32'b0;
             rs2_data_out   <= 32'b0;
@@ -104,8 +83,6 @@ module id_ex_reg (
             funct3_out     <= 3'b0;
             funct7_out     <= 7'b0;
         end else if (stall) begin
-            // on stall, convert this stage to bubble by clearing control signals,
-            // but hold current outputs (so previous ID stage isn't consumed).
             reg_write_out  <= 1'b0;
             mem_read_out   <= 1'b0;
             mem_write_out  <= 1'b0;
@@ -115,7 +92,7 @@ module id_ex_reg (
             branch_out     <= 1'b0;
             jal_out        <= 1'b0;
             jalr_out       <= 1'b0;
-            // retain data outputs as they were (or set to zero); typical approach is to insert bubble with zero controls.
+            
             rs1_data_out   <= rs1_data_in;
             rs2_data_out   <= rs2_data_in;
             imm_out        <= imm_in;
