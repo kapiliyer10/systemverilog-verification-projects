@@ -1,25 +1,3 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 09/13/2025 10:37:04 PM
-// Design Name: 
-// Module Name: Control_unit
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
 module Control_unit(
 input [6:0] opcode,
 output reg branch,mem_read,mem_write,mem_to_reg, reg_write, jal,jalr,
