@@ -1,25 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 10/23/2025 08:06:31 PM
-// Design Name: 
-// Module Name: RISCV_wp
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
-`timescale 1ns/1ps
 module RISCV_wp (
     input  wire clk,
     input  wire rst
@@ -28,7 +6,7 @@ module RISCV_wp (
     wire [31:0] pc, pc_next, pc_plus4;
     wire [31:0] instr_if;
 
-    // instantiate PC and IMEM (from your existing modules) - see RISCV.docx. :contentReference[oaicite:1]{index=1}
+    // PC and IMEM
     PC pc_u (.clk(clk), .rst(rst), .pc_next(pc_next), .pc(pc));
     Instruction_mem imem_u (.addr(pc), .instr(instr_if));
 
@@ -42,7 +20,7 @@ module RISCV_wp (
                        .pc_in(pc), .instr_in(instr_if),
                        .pc_out(if_id_pc), .instr_out(if_id_instr));
 
-    // ID stage decode fields
+    // ID stage decode
     wire [6:0]  id_opcode = if_id_instr[6:0];
     wire [4:0]  id_rd     = if_id_instr[11:7];
     wire [2:0]  id_funct3 = if_id_instr[14:12];
@@ -50,7 +28,7 @@ module RISCV_wp (
     wire [4:0]  id_rs2    = if_id_instr[24:20];
     wire [6:0]  id_funct7 = if_id_instr[31:25];
 
-    // ID: control unit and imm gen (your modules)
+    // ID: control unit and imm gen
     wire branch_id, mem_read_id, mem_write_id, mem_to_reg_id, reg_write_id, jal_id, jalr_id, alu_src_id;
     wire [1:0] alu_op_id;
     Control_unit ctrl_u(.opcode(id_opcode), .branch(branch_id), .mem_read(mem_read_id), .mem_write(mem_write_id),
@@ -60,11 +38,9 @@ module RISCV_wp (
     wire [31:0] imm_id;
     Imm_gen imm_u(.instr(if_id_instr), .imm(imm_id)); // from file. :contentReference[oaicite:3]{index=3}
 
-    // Register file read (your Regmem supports asynchronous reads)
+    // Register file read
     wire [31:0] reg_rd1, reg_rd2;
-    // We'll write to regfile in WB stage using Regmem's write interface.
-    // Create temporary signals for writeback
-    wire        wb_reg_write;
+    wire wb_reg_write;
     wire [4:0]  wb_rd;
     wire [31:0] wb_wd;
 
@@ -83,15 +59,15 @@ module RISCV_wp (
     // stall/flush control from hazard unit and branch decision
     wire hazard_stall;
     wire pc_write;
-   // wire ifid_flush_w = 1'b0; // will be set on branch taken when in EX
+   // wire ifid_flush_w = 1'b0;
 
     hazard_unit hz_u (.id_ex_memread(id_ex_mem_read), .id_ex_rd(id_ex_rd),
                       .if_id_rs1(id_rs1), .if_id_rs2(id_rs2),
                       .stall(hazard_stall), .pc_write(pc_write));
 
-    // connect stall/flush to IF/ID and ID/EX
+    // connecting stall/flush to IF/ID and ID/EX
     assign if_id_stall = hazard_stall;
-    // ID/EX will be given stall/flush signals below
+    
     wire [31:0] rd1_final, rd2_final; 
     id_ex_reg u_id_ex (.clk(clk), .rst(rst), .stall(if_id_stall), .flush(if_id_flush),
                        .pc_in(if_id_pc), .rs1_data_in(rd1_final), .rs2_data_in(rd2_final),
@@ -109,7 +85,7 @@ module RISCV_wp (
                        .branch_out(id_ex_branch), .jal_out(id_ex_jal), .jalr_out(id_ex_jalr),
                        .funct3_out(id_ex_funct3), .funct7_out(id_ex_funct7));
 
-    // EX stage: ALU control (use your ALU_Control)
+    // EX stage: ALU control
     wire [3:0] alu_ctrl_ex;
     ALU_Control aluctrl_ex(.alu_op(id_ex_alu_op), .func3(id_ex_funct3), .func7(id_ex_funct7), .alu_ctrl(alu_ctrl_ex)); // from file. :contentReference[oaicite:5]{index=5}
 
@@ -127,7 +103,7 @@ module RISCV_wp (
 
     // EX-stage operand selection with forwarding
     reg [31:0] alu_in1, alu_in2;
-    // We'll need values from EX/MEM and MEM/WB:
+
     wire [31:0] exmem_alu_result, exmem_mem_data_forw;
     wire [31:0] id_ex_rs2_final_sw;
    // wire memwb_mem_to_reg_out;
@@ -155,13 +131,13 @@ assign id_ex_rs2_final_sw = (~id_ex_mem_write)?id_ex_rs2_data:(forwardB==2'b01)?
                             wb_wd:
                             exmem_alu_result;
    
-    // ALU instance (your ALU)
+    // ALU
     wire [31:0] alu_result_ex;
     wire        zero_ex;
     ALU alu_ex(.d1(alu_in1), .d2(alu_in2), .alu_ctrl(alu_ctrl_ex), .zero(zero_ex), .alures(alu_result_ex)); // from file. :contentReference[oaicite:6]{index=6}
 
 
-    // Prepare inputs to EX/MEM register
+    
    // wire [31:0] ex_mem_pc_in = id_ex_pc;
    // wire [31:0] ex_mem_rs2_data_in = id_ex_rs2_data;
    // wire [4:0]  ex_mem_rd_in = id_ex_rd;
@@ -189,11 +165,11 @@ assign id_ex_rs2_final_sw = (~id_ex_mem_write)?id_ex_rs2_data:(forwardB==2'b01)?
                          .reg_write_out(ex_mem_reg_write), .mem_read_out(ex_mem_mem_read),
                          .mem_write_out(ex_mem_mem_write), .mem_to_reg_out(ex_mem_mem_to_reg));
 
-    // connect forwarding inputs (now that ex_mem regs exist)
+    // connect forwarding inputs
     assign exmem_regwrite_wire = ex_mem_reg_write;
     assign exmem_rd_wire       = ex_mem_rd;
 
-    // MEM stage: data memory access (your Data_mem)
+    // MEM stage: data memory access
     wire [31:0] mem_dmem_read;
     Data_mem dmem_u(.clk(clk), .readmem(ex_mem_mem_read), .writemem(ex_mem_mem_write),
                     .addr(ex_mem_alu_result), .write_data(ex_mem_rs2_data), .read_data(mem_dmem_read)); // from file. :contentReference[oaicite:7]{index=7}
@@ -202,7 +178,7 @@ assign id_ex_rs2_final_sw = (~id_ex_mem_write)?id_ex_rs2_data:(forwardB==2'b01)?
     assign exmem_alu_result = ex_mem_alu_result;
     assign exmem_mem_data_forw = mem_dmem_read;
 
-    // MEM/WB register inputs
+    
 /*    wire [31:0] mem_wb_alu_result_in = ex_mem_alu_result;
     wire [31:0] mem_wb_mem_data_in   = mem_dmem_read;
     wire [4:0]  mem_wb_rd_in         = ex_mem_rd;
@@ -234,17 +210,6 @@ assign id_ex_rs2_final_sw = (~id_ex_mem_write)?id_ex_rs2_data:(forwardB==2'b01)?
     assign wb_reg_write = mem_wb_reg_write;
     assign wb_rd        = mem_wb_rd;
     assign wb_wd        = mem_wb_mem_to_reg_out ? mem_wb_mem_data : mem_wb_alu_result;
-
-    // expose memwb signals used in forwarding case expressions
-    // create helper signals for forwarding selection:
-    // memwb_mem_to_reg_out already exists as a wire from mem_wb_reg instance
-
-    // For forwarding selection above we used memwb_mem_to_reg_out, memwb_alu_result, memwb_mem_data
-    // connect aliases:
-    // memwb_alu_result and memwb_mem_data defined above; memwb_mem_to_reg_out defined as
-    // mem_wb_reg instance output mem_to_reg_out
-
-
    
 // Default next PC
 wire [31:0] branch_target,jal_target, jalr_target;
@@ -256,14 +221,14 @@ wire branch_taken;
 assign branch_taken = (id_ex_branch&(id_ex_funct3==3'b000|id_ex_funct3==3'b101) & zero_ex)|
 (id_ex_branch&(id_ex_funct3==3'b001|id_ex_funct3==3'b100)&~zero_ex);
 
-// Select final PC source
+// Final PC source
 assign pc_next = (id_ex_jalr) ? jalr_target :
                  (id_ex_jal)  ? jal_target  :
                  (branch_taken) ? branch_target :
                  (pc_write)?pc_plus4:pc;
                  
 
-// flush pipeline on any control transfer
+// Pipeline flush
 wire [31:0] ex_result;
 wire jump_taken;
 assign jump_taken= id_ex_jal | id_ex_jalr;
@@ -272,8 +237,6 @@ assign control_flush = branch_taken | jump_taken;
 assign ex_result =(id_ex_jal | id_ex_jalr) ? (id_ex_pc + 4) : alu_result_ex;
 assign ex_mem_alu_result_in = ex_result;
 
- // Branch handling: when branch_taken, flush IF/ID and ID/EX and set PC to branch target
-    // branch target = id_ex_pc + imm (we passed id_ex_pc and imm to EX)
  /*   reg flush_ifid; //flush_idex;
     always @(*) begin
         if (control_flush) begin
