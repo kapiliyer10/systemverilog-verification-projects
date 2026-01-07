@@ -6,7 +6,6 @@ output reg[3:0] alu_ctrl
     );
     
     always @(*) begin
-        // default map - extend as needed
         alu_ctrl = 4'b0010; // add
         if (alu_op==2'b10) begin // R-type
             case (func3)
