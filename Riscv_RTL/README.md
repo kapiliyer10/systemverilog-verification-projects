@@ -139,11 +139,11 @@ How to Simulate
 
 
 
-You can simulate using Vivado, ModelSim, or Verilator.
+You can simulate using Xilinx Vivado.
 
 
 
- Example (Vivado Simulation)
+ Example
 
 1\. Create a simulation project  
 
@@ -159,7 +159,6 @@ You can simulate using Vivado, ModelSim, or Verilator.
 
 5\. Observe register/memory updates
 
-RISC-V RTL Design (Academic/Project Work)
 
 
 
