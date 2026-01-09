@@ -159,32 +159,8 @@ You can simulate using Vivado, ModelSim, or Verilator.
 
 5\. Observe register/memory updates
 
-
-
----
-
-
-
- Future Improvements (Optional)
-
-
-
-\- Stalling logic
-
-\- Support for more RISC-V instructions
-
-\- Integration with an assembler toolchain
-
-
-
----
-
-
- Author
-
-Kapil Iyer  
-
 RISC-V RTL Design (Academic/Project Work)
+
 
 
 
