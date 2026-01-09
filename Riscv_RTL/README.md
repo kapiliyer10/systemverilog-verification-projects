@@ -4,11 +4,11 @@
 
 
 
-\## Processor Overview
+Processor Overview
 
 
 
-\### **1. Non-Pipelined Version (`RISCVwop.v`)**
+**1. Non-Pipelined Version (`RISCVwop.v`)**
 
 Implements a basic single-cycle RISC-V datapath:
 
@@ -32,7 +32,7 @@ All operations occur in one cycle, making the design simple but slower for compl
 
 
 
-\### **2. Pipelined Version (`RISCV\_wp.v`)**
+**2. Pipelined Version (`RISCV\_wp.v`)**
 
 Implements a 5-stage RISC-V pipeline:
 
@@ -63,12 +63,11 @@ Includes:
 ---
 
 
-
-\## 🔧 Modules Description
-
+Modules Description
 
 
-\### **ALU.v**
+
+**ALU.v**
 
 Implements arithmetic and logical operations including:
 
@@ -80,13 +79,13 @@ Implements arithmetic and logical operations including:
 
 
 
-\### **ALU\_Control.v**
+**ALU\_Control.v**
 
 Decodes funct3/funct7 and ALUOp to generate ALU control signals.
 
 
 
-\### **Regmem.v**
+**Regmem.v**
 
 Contains:
 
@@ -96,7 +95,7 @@ Contains:
 
 
 
-\### **PC.v**
+**PC.v**
 
 Program counter logic handling sequential PC updates and branch targets.
 
@@ -106,7 +105,7 @@ Program counter logic handling sequential PC updates and branch targets.
 
 
 
-\## 📦 Instruction Test Files
+Instruction Test Files
 
 
 
@@ -136,7 +135,7 @@ You can load these into instruction memory to verify functionality.
 
 
 
-\## How to Simulate
+How to Simulate
 
 
 
@@ -186,5 +185,6 @@ You can simulate using Vivado, ModelSim, or Verilator.
 Kapil Iyer  
 
 RISC-V RTL Design (Academic/Project Work)
+
 
 
